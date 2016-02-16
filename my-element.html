@@ -13,21 +13,11 @@
 		created: function () {
 			this.style.border = '2px solid green';
 		},
-		properties: {
-			disabled: {
-				type: Boolean,
-				observer: '_disabledChanged' // called when value changes
-			}
+		listeners: {
+			'click': 'clickHandler'
 		},
-		_disabledChanged: function(newValue, oldValue) {
-			console.log(arguments);
+		'clickHandler': function(e) {
+			alert('clicked!');
 		}
 	});
-
-	// fakes user action
-	window.setTimeout(function() {
-		var button = document.querySelector('button');
-		
-		button.setAttribute('disabled', true);
-	}, 1000);
 </script>
