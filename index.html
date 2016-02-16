@@ -5,7 +5,21 @@
 		<link rel="import" href="my-element.html">
 	</head>
 	<body>
-		<!-- insert a `my-input` which extends the native element -->
-		<input is="my-input" placeholder="in da html" style="background:pink">
+		<dom-module id="main-document-element">
+			<template>
+				<p>
+					Hi! I'm a Polymer element that was defined in the
+					main document!
+				</p>
+			</template>
+			<script>
+				HTMLImports.whenReady(function () {
+					Polymer({
+						is: 'main-document-element'
+					});
+				});
+			</script>
+		</dom-module>
+		<main-document-element></main-document-element>
 	</body>
 </html>
