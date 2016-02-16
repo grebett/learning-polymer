@@ -1,44 +1,33 @@
 <link rel="import"
 	href="bower_components/polymer/polymer.html">
 
+<!-- https://www.polymer-project.org/1.0/docs/devguide/properties.html#change-callbacks -->
+
 <script>
 	'use strict';
-
+	
 	// register a new element
-	var MyElement = Polymer({
-		is: 'my-element',
+	var MyInput = Polymer({
+		is: 'my-button',
+		extends: 'button',
+		created: function () {
+			this.style.border = '2px solid green';
+		},
 		properties: {
-			hide: Boolean,
-			color: String,
-			borderSize: {
-				type: Number,
-				reflectToAttribute: true,
-				value: 5,
-				computed: 'computeBorderSize(multiplicator)',
-			},
-			multiplicator: Number
-		},
-		ready: function() {
-			this.textContent = 'hello world!';
-			if (this.hide === true) {
-				this.style.display = 'none';
+			disabled: {
+				type: Boolean,
+				observer: '_disabledChanged' // called when value changes
 			}
-			this.style.backgroundColor = this.color || 'blue';
-			this.style.border = 'solid ' + this.borderSize + 'px grey';
 		},
-		computeBorderSize: function(multiplicator) {
-			return this.borderSize * multiplicator;
+		_disabledChanged: function(newValue, oldValue) {
+			console.log(arguments);
 		}
 	});
 
-	// register
-	var body = document.querySelector('body');
-
-	// setTimeOut fakes a user action
-	window.setTimeout(function () {
-		var element = document.getElementsByTagName('my-element')[0];
+	// fakes user action
+	window.setTimeout(function() {
+		var button = document.querySelector('button');
 		
-		// let's change it manually ; the attribute value is changed in the xml too because of `reflectToAttribute` set to `true`
-		element.multiplicator = 2;
+		button.setAttribute('disabled', true);
 	}, 1000);
 </script>
