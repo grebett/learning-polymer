@@ -12,10 +12,11 @@
 			color: String,
 			borderSize: {
 				type: Number,
-				readOnly: false,
 				reflectToAttribute: true,
-				notify: true
-			}
+				value: 5,
+				computed: 'computeBorderSize(multiplicator)',
+			},
+			multiplicator: Number
 		},
 		ready: function() {
 			this.textContent = 'hello world!';
@@ -24,6 +25,9 @@
 			}
 			this.style.backgroundColor = this.color || 'blue';
 			this.style.border = 'solid ' + this.borderSize + 'px grey';
+		},
+		computeBorderSize: function(multiplicator) {
+			return this.borderSize * multiplicator;
 		}
 	});
 
@@ -33,13 +37,8 @@
 	// setTimeOut fakes a user action
 	window.setTimeout(function () {
 		var element = document.getElementsByTagName('my-element')[0];
-
-		// this event is triggered when the `border-size` attribute change
-		element.addEventListener('border-size-changed', function (event) {
-			console.log(event.target.borderSize);
-		});
 		
 		// let's change it manually ; the attribute value is changed in the xml too because of `reflectToAttribute` set to `true`
-		element.borderSize = 10;
+		element.multiplicator = 2;
 	}, 1000);
 </script>
