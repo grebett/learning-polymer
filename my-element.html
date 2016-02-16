@@ -7,22 +7,11 @@
 	// register a new element
 	var MyElement = Polymer({
 		is: 'my-element',
+		hostAttributes: {
+			'x-boom': 'badaboom'
+		},
 		ready: function() {
-			this.textContent = 'myFirstElement';
-			console.log('ready');
-		},
-		created: function() {
-			// console.dir(this);
-			console.log('created');
-		},
-		attached: function() {
-			console.log('attached');
-		},
-		detached: function() {
-			console.log('detached');
-		},
-		attributeChanged: function() {
-			console.log('changed');
+			this.textContent = 'hello world!';
 		}
 	});
 
@@ -30,9 +19,5 @@
 	var element = new MyElement();
 	
 	body.appendChild(element);
-	window.setTimeout(function() {
-		element.setAttribute('id', 1);
-		body.removeChild(element);
-	}, 1000);
-
+	console.log(element.getAttribute('x-boom'));
 </script>
