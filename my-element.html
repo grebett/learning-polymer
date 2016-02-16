@@ -5,19 +5,18 @@
 	'use strict';
 
 	// register a new element
-	var MyElement = Polymer({
+	var MyElement = Polymer.Class({
 		is: 'my-element',
-		hostAttributes: {
-			'x-boom': 'badaboom'
-		},
-		ready: function() {
+		created: function() {
 			this.textContent = 'hello world!';
 		}
 	});
 
+	// register
 	var body = document.querySelector('body');
-	var element = new MyElement();
+	document.registerElement('my-element', MyElement);
 	
+	// then instanciate
+	var element = new MyElement();
 	body.appendChild(element);
-	console.log(element.getAttribute('x-boom'));
 </script>
