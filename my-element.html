@@ -5,18 +5,41 @@
 	'use strict';
 
 	// register a new element
-	var MyElement = Polymer.Class({
+	var MyElement = Polymer({
 		is: 'my-element',
-		created: function() {
+		properties: {
+			hide: Boolean,
+			color: String,
+			borderSize: {
+				type: Number,
+				readOnly: false,
+				reflectToAttribute: true,
+				notify: true
+			}
+		},
+		ready: function() {
 			this.textContent = 'hello world!';
+			if (this.hide === true) {
+				this.style.display = 'none';
+			}
+			this.style.backgroundColor = this.color || 'blue';
+			this.style.border = 'solid ' + this.borderSize + 'px grey';
 		}
 	});
 
 	// register
 	var body = document.querySelector('body');
-	document.registerElement('my-element', MyElement);
-	
-	// then instanciate
-	var element = new MyElement();
-	body.appendChild(element);
+
+	// setTimeOut fakes a user action
+	window.setTimeout(function () {
+		var element = document.getElementsByTagName('my-element')[0];
+
+		// this event is triggered when the `border-size` attribute change
+		element.addEventListener('border-size-changed', function (event) {
+			console.log(event.target.borderSize);
+		});
+		
+		// let's change it manually ; the attribute value is changed in the xml too because of `reflectToAttribute` set to `true`
+		element.borderSize = 10;
+	}, 1000);
 </script>
