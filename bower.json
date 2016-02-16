@@ -1,0 +1,22 @@
+{
+  "name": "learning-polymer",
+  "homepage": "https://github.com/grebett/learning-polymer",
+  "description": "here are some snippets coded while learning polymer",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "grebett"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0"
+  }
+}

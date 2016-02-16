@@ -1,0 +1,31 @@
+<link rel="import"
+	href="bower_components/polymer/polymer.html">
+
+<script>
+	'use strict';
+
+	// register a new element
+	Polymer({
+		is: 'my-element',
+		ready: function() {
+			this.textContent = 'myFirstElement';
+		}
+	});
+	
+	// other way
+	let MyOtherElement = Polymer({
+		is: 'my-other-element',
+		created: function() {
+			console.log('I am created!');
+		},
+		ready: function() {
+			this.textContent = 'mySecondElement';
+		}
+	});
+	
+	let $body = document.querySelector('body');
+	let el = document.createElement('my-other-element'); // or el = new MyOtherElement();
+
+	$body.appendChild(el);
+
+</script>
